@@ -1,0 +1,12 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.mainMap {
+  height: 70vh;
+  width: 50vw;
+  padding: 1.5em;
+}
