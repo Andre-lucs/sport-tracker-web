@@ -15,7 +15,7 @@ type ApiData = {
 
 export default function Map({className} : {className: string}) {
 
-	const zoom = 20;
+	const zoom = 18;
 	const center = latLng(-7.117869, -38.497612);
 
 	const [heatPoints, setHeatPoints] = useState<HeatLatLngTuple[]>([]);
@@ -62,8 +62,8 @@ export default function Map({className} : {className: string}) {
 	return (
 		<>
 		<span>Mapa</span>
-		<MapContainer center={center} zoom={zoom} className={className} bounceAtZoomLimits>
-			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+		<MapContainer center={center} zoom={zoom} className={className} maxZoom={25} >
+			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" maxNativeZoom={18} maxZoom={25} />
 			
 			<HeatLayer heatPoints={heatPoints} handleMapClick={handleMapClick} />
 			<Polygon pathOptions={{color: 'blue'}} positions={[ boxShape.first, boxShape.second, boxShape.third, boxShape.fourth]} />
@@ -77,9 +77,7 @@ function latLngToArray(value: LatLng) : number[] {
 }
 
 function HeatLayer({heatPoints, handleMapClick} : {heatPoints: HeatLatLngTuple[], handleMapClick: (e:LeafletMouseEvent) => void }) {
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const map = useMapEvents({
+	useMapEvents({
 		click: (e) => {
 			handleMapClick(e);
 		},
